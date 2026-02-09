@@ -3,276 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapr87's Utility Lab | Command Center</title>
+    <title>Lapr87 Command | The Ultimate Utility</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #38bdf8; --bg: #020617; --card: #1e293b; --text: #f1f5f9; --gold: #f59e0b; --green: #10b981; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* Dashboard Bar */
-        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 15px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
+        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 15px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
         .dash-item span { color: var(--accent); margin-left: 5px; font-family: monospace; }
 
-        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
         header { text-align: center; margin-bottom: 50px; }
         h1 { font-size: 3.5rem; margin: 0; font-weight: 900; letter-spacing: -2px; }
-        .search-bar { width: 100%; max-width: 500px; padding: 15px; border-radius: 50px; border: 1px solid #334155; background: #0f172a; color: white; margin-top: 25px; outline: none; }
+        .tagline { opacity: 0.7; margin-top: 10px; font-size: 1.1rem; }
 
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
-        .card { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #334155; transition: 0.3s; display: flex; flex-direction: column; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        h3 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 20px; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .card { background: var(--card); padding: 30px; border-radius: 24px; border: 1px solid #334155; transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h3 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; border-bottom: 1px solid #334155; padding-bottom: 12px; margin-bottom: 20px; }
 
-        /* Form Elements */
-        input, select, button { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 0.95rem; box-sizing: border-box; }
+        input, select, button { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 0.95rem; box-sizing: border-box; outline: none; transition: 0.2s; }
+        input:focus, select:focus { border-color: var(--accent); }
         button { background: var(--accent); color: #020617; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
-        button:hover { background: #7dd3fc; }
+        button:hover { background: #7dd3fc; transform: scale(1.02); }
 
-        /* Crypto Specific */
-        .crypto-value { font-size: 2rem; font-weight: 900; color: var(--green); text-align: center; margin: 15px 0; }
-        .crypto-sub { text-align: center; opacity: 0.6; font-size: 0.8rem; }
-
-        .advice-box { background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 10px; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent); }
+        .crypto-value { font-size: 2.2rem; font-weight: 900; color: var(--green); text-align: center; margin: 15px 0; font-family: monospace; }
+        .advice-box { background: #0f172a; border: 1px solid #334155; padding: 25px; border-radius: 12px; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
 
         .casino-banner { background: linear-gradient(135deg, #1e293b, #020617); border: 2px solid var(--gold); padding: 50px; border-radius: 30px; margin-top: 60px; text-align: center; }
-        .btn-play { background: var(--gold); color: white; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.3rem; margin-top: 20px; box-shadow: 0 10px 20px rgba(245,158,11,0.3); }
+        .btn-play { background: var(--gold); color: white; padding: 20px 60px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.4rem; margin-top: 25px; box-shadow: 0 10px 25px rgba(245,158,11,0.4); transition: 0.3s; }
+        .btn-play:hover { transform: scale(1.05); filter: brightness(1.1); }
     </style>
 </head>
 <body>
 
 <div class="dashboard">
-    <div class="dash-item">ACCESS IP: <span id="ip">0.0.0.0</span></div>
-    <div class="dash-item">LOCAL TIME: <span id="time">00:00:00</span></div>
-    <div class="dash-item">SYSTEM DATE: <span id="date">--/--/--</span></div>
+    <div class="dash-item">IP: <span id="ip">FETCHING...</span></div>
+    <div class="dash-item">TIME: <span id="time">00:00:00</span></div>
+    <div class="dash-item">DATE: <span id="date">--/--/--</span></div>
 </div>
 
 <div class="container">
     <header>
-        <h1>Lapr87 Command 🛠️</h1>
-        <p>Live Data. Universal Conversion. Strategic Advice.</p>
-        <input type="text" id="toolSearch" class="search-bar" placeholder="Search categories..." onkeyup="filter()">
+        <h1>Lapr87 Command Center</h1>
+        <p class="tagline">Universal Metrics • Live Markets • Advanced Strategy</p>
     </header>
 
     <div class="tool-grid">
-        <div class="card" data-name="crypto bitcoin ethereum price value currency">
-            <h3>Live Crypto Watch</h3>
-            <div style="display: flex; gap: 10px;">
-                <select id="cryptoCoin" onchange="fetchCrypto()">
-                    <option value="bitcoin">Bitcoin (BTC)</option>
-                    <option value="ethereum">Ethereum (ETH)</option>
-                    <option value="solana">Solana (SOL)</option>
-                    <option value="dogecoin">Dogecoin (DOGE)</option>
-                    <option value="ripple">Ripple (XRP)</option>
-                </select>
-                <select id="fiatCurrency" onchange="fetchCrypto()">
-                    <option value="usd">USD ($)</option>
-                    <option value="eur">EUR (€)</option>
-                    <option value="gbp">GBP (£)</option>
-                    <option value="aud">AUD ($)</option>
-                    <option value="cad">CAD ($)</option>
-                </select>
+        <div class="card">
+            <h3>Live Market Ticker</h3>
+            <div style="display: flex; gap: 8px;">
+                <select id="coin" onchange="getPrices()"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="solana">SOL</option><option value="dogecoin">DOGE</option></select>
+                <select id="fiat" onchange="getPrices()"><option value="usd">USD ($)</option><option value="eur">EUR (€)</option><option value="gbp">GBP (£)</option></select>
             </div>
-            <div id="cryptoPrice" class="crypto-value">---</div>
-            <div class="crypto-sub">Live data provided via Lapr87 Relay</div>
-            <button onclick="fetchCrypto()">Refresh Price</button>
+            <div id="priceDisplay" class="crypto-value">---</div>
+            <button onclick="getPrices()">Refresh Market</button>
         </div>
 
-        <div class="card" data-name="convert weight length volume speed pressure area digital temperature">
-            <h3>Master Converter</h3>
-            <select id="category" onchange="updateUnits()" style="margin-bottom: 5px;">
-                <option value="length">Length & Distance</option>
-                <option value="weight">Weight & Mass</option>
-                <option value="volume">Volume & Liquid</option>
-                <option value="speed">Speed</option>
-                <option value="digital">Digital Storage</option>
-                <option value="area">Area</option>
-                <option value="pressure">Pressure</option>
+        <div class="card">
+            <h3>Universal Converter</h3>
+            <select id="cat" onchange="loadUnits()">
+                <option value="len">Length (mm to Light-years)</option>
+                <option value="mass">Weight & Mass (mg to Tons)</option>
+                <option value="vol">Volume (ml to Gallons)</option>
+                <option value="temp">Temperature</option>
+                <option value="speed">Speed (km/h to Mach)</option>
+                <option value="digital">Data (Bytes to TB)</option>
+                <option value="pressure">Pressure (psi to bar)</option>
+                <option value="energy">Energy (Joules to kWh)</option>
             </select>
-            <input type="number" id="inputVal" placeholder="Amount" oninput="doConvert()">
-            <div style="display: flex; gap: 5px; align-items: center; margin: 5px 0;">
-                <select id="fromUnit" onchange="doConvert()"></select>
-                <select id="toUnit" onchange="doConvert()"></select>
+            <input type="number" id="amt" placeholder="Amount" oninput="convert()">
+            <div style="display: flex; gap: 8px; margin: 8px 0;">
+                <select id="from" onchange="convert()"></select>
+                <select id="to" onchange="convert()"></select>
             </div>
-            <div id="res" style="text-align:center; font-weight:900; font-size:1.4rem; color:var(--accent); margin-top:5px;">---</div>
+            <div id="res" style="text-align:center; font-weight:900; font-size:1.5rem; color:var(--accent); margin-top:10px;">---</div>
         </div>
 
-        <div class="card" data-name="strategy advisor luck decision">
-            <h3>Strategy Advisor</h3>
-            <div id="advice" class="advice-box">Awaiting Query...</div>
-            <button onclick="getAdvice()">Analyze Position</button>
+        <div class="card">
+            <h3>Lapr87 Tactical Advisor</h3>
+            <div id="advice" class="advice-box">SYSTEM IDLE...</div>
+            <button onclick="analyze()">Run Strategy Scan</button>
         </div>
     </div>
 
     <div class="casino-banner">
-        <h2>Calculations Finalized? 🚀</h2>
-        <p>Market data processed. Now it's time to leverage your position at <strong>Casino Rocket</strong>.</p>
+        <h2>Data Analysis Complete 🚀</h2>
+        <p>Market variables aligned. It's time to leverage your position at <strong>Casino Rocket</strong>.</p>
         <a href="[PASTE_YOUR_LINK_HERE]" class="btn-play">ENTER COCKPIT</a>
     </div>
 </div>
 
 <script>
-    // Crypto Logic
-    async function fetchCrypto() {
-        const coin = document.getElementById('cryptoCoin').value;
-        const fiat = document.getElementById('fiatCurrency').value;
-        const display = document.getElementById('cryptoPrice');
-        display.innerText = "Loading...";
-        try {
-            const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=${fiat}`);
-            const data = await response.json();
-            const price = data[coin][fiat];
-            const symbol = fiat === 'usd' ? '$' : fiat === 'eur' ? '€' : fiat === 'gbp' ? '£' : '$';
-            display.innerText = symbol + price.toLocaleString();
-        } catch (e) {
-            display.innerText = "Error";
-        }
-    }
-
-    // Universal Converter Data
-    const units = {
-        length: {m: 1, mm: 0.001, cm: 0.01, km: 1000, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.34, nm: 1852},
-        weight: {kg: 1, g: 0.001, mg: 0.000001, oz: 0.0283495, lb: 0.453592, st: 6.35029, t: 1000},
-        volume: {l: 1, ml: 0.001, gal: 3.78541, qt: 0.946353, pt: 0.473176, cup: 0.24, floz: 0.0295735},
-        speed: {mps: 1, kmh: 0.277778, mph: 0.44704, knot: 0.514444, mach: 343},
+    const data = {
+        len: {mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.34, nmi: 1852, ly: 9460730472580800},
+        mass: {mg: 0.000001, g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495, st: 6.35029, ton: 1000},
+        vol: {ml: 0.001, l: 1, cup: 0.24, pt: 0.473176, qt: 0.946353, gal: 3.78541, floz: 0.0295735},
+        temp: {c: 'c', f: 'f', k: 'k'},
+        speed: {kmh: 1, mph: 1.60934, mps: 3.6, knot: 1.852, mach: 1234.8},
         digital: {b: 1, kb: 1024, mb: 1048576, gb: 1073741824, tb: 1099511627776},
-        area: {sqm: 1, sqft: 0.092903, sqin: 0.00064516, acre: 4046.86, hectare: 10000, sqkm: 1000000},
-        pressure: {pascal: 1, bar: 100000, psi: 6894.76, atm: 101325}
+        pressure: {pa: 1, bar: 100000, psi: 6894.76, atm: 101325},
+        energy: {j: 1, cal: 4.184, wh: 3600, kwh: 3600000, btu: 1055.06}
     };
 
-    function updateUnits() {
-        const cat = document.getElementById('category').value;
-        const from = document.getElementById('fromUnit');
-        const to = document.getElementById('toUnit');
-        from.innerHTML = to.innerHTML = "";
-        Object.keys(units[cat]).forEach(u => {
-            from.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
-            to.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
+    function loadUnits() {
+        const c = document.getElementById('cat').value;
+        const f = document.getElementById('from');
+        const t = document.getElementById('to');
+        f.innerHTML = t.innerHTML = "";
+        Object.keys(data[c]).forEach(u => {
+            f.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
+            t.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
         });
-        doConvert();
+        convert();
     }
 
-    function doConvert() {
-        const val = parseFloat(document.getElementById('inputVal').value);
-        const cat = document.getElementById('category').value;
-        const from = document.getElementById('fromUnit').value;
-        const to = document.getElementById('toUnit').value;
-        const res = document.getElementById('res');
-        if (isNaN(val)) { res.innerText = "---"; return; }
-        let result = (val * units[cat][from]) / units[cat][to];
-        res.innerText = result.toLocaleString(undefined, {maximumFractionDigits: 4});
-    }
-
-    function getAdvice() {
-        const tips = [
-            "STRATEGY: High volatility detected. Maximize intent.",
-            "STRATEGY: Calculated entry recommended. Wait 5 minutes.",
-            "STRATEGY: Divergent approach. Change your betting pattern.",
-            "STRATEGY: Momentum is building. Trust the process.",
-            "STRATEGY: Full Spectrum scan complete. The odds are in flux.",
-            "STRATEGY: Execute 'Lapr87 Protocol'. Go all in."
-        ];
-        document.getElementById('advice').innerText = tips[Math.floor(Math.random()*tips.length)];
-    }
-
-    // Init
-    fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip);
-    setInterval(()=>{ let n = new Date(); document.getElementById('time').innerText=n.toLocaleTimeString(); document.getElementById('date').innerText=n.toLocaleDateString(); }, 1000);
-    updateUnits();
-    fetchCrypto();
-    
-    function filter() {
-        let q = document.getElementById('toolSearch').value.toLowerCase();
-        let c = document.getElementsByClassName('card');
-        for(let i=0; i<c.length; i++) c[i].style.display = c[i].getAttribute('data-name').includes(q) ? "" : "none";
-    }
-</script>
-</body>
-</html>
-n()).then(d=>document.getElementById('ip').innerText=d.ip);
-    setInterval(()=>{ let n = new Date(); document.getElementById('time').innerText=n.toLocaleTimeString(); document.getElementById('date').innerText=n.toLocaleDateString(); }, 1000);
-    updateUnits();
-    fetchCrypto();
-    
-    function filter() {
-        let q = document.getElementById('toolSearch').value.toLowerCase();
-        let c = document.getElementsByClassName('card');
-        for(let i=0; i<c.length; i++) c[i].style.display = c[i].getAttribute('data-name').includes(q) ? "" : "none";
-    }
-</script>
-</body>
-</html>
-        <h1>Lapr87's Lab 🛠️</h1>
-        <p>No ads, no clutter, just the tools you actually need.</p>
-        <input type="text" id="toolSearch" class="search-bar" placeholder="Search tools (e.g. 'kg', 'psi', 'luck')" onkeyup="filter()">
-    </header>
-    <div class="tool-grid" id="grid">
-        <div class="card" data-name="convert weight temperature length pressure kg lbs psi">
-            <h3>Master Converter</h3>
-            <input type="number" id="val" placeholder="Value">
-            <select id="unit">
-                <option value="kg2lb">Weight: Kg to Lbs</option>
-                <option value="lb2kg">Weight: Lbs to Kg</option>
-                <option value="c2f">Temp: °C to °F</option>
-                <option value="f2c">Temp: °F to °C</option>
-                <option value="psi2bar">Pressure: PSI to Bar</option>
-                <option value="m2ft">Length: Meters to Feet</option>
-            </select>
-            <button onclick="convert()">Calculate</button>
-            <p id="res" style="text-align:center; font-weight:bold; color:var(--accent);"></p>
-        </div>
-        <div class="card" data-name="password security generator">
-            <h3>Secure Key Gen</h3>
-            <p id="passDisplay" style="text-align:center; background:#0f172a; padding:10px; border-radius:5px; font-family:monospace;">********</p>
-            <button onclick="genPass()">Generate</button>
-        </div>
-        <div class="card" data-name="luck decision flip coin yes no">
-            <h3>The Luck Decider</h3>
-            <p id="decision" style="text-align:center; font-size:1.5rem; min-height:40px;">Should you do it?</p>
-            <button onclick="decide()">Ask Lapr87</button>
-        </div>
-    </div>
-    <div class="casino-zone">
-        <h2>Feeling the momentum? 🚀</h2>
-        <p>Calculations are done. Now it's time to play. Join me at <strong>Casino Rocket</strong> for an exclusive lift-off bonus.</p>
-        <a href="[lapr87.github.io]" class="btn-play">GET FREE SPINS</a>
-    </div>
-</div>
-<script>
-    fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip);
-    setInterval(()=>{
-        let n = new Date();
-        document.getElementById('time').innerText=n.toLocaleTimeString();
-        document.getElementById('date').innerText=n.toLocaleDateString();
-    }, 1000);
-    function filter() {
-        let q = document.getElementById('toolSearch').value.toLowerCase();
-        let c = document.getElementsByClassName('card');
-        for(let i=0; i<c.length; i++) c[i].style.display = c[i].getAttribute('data-name').includes(q) ? "" : "none";
-    }
     function convert() {
-        let v = document.getElementById('val').value;
-        let u = document.getElementById('unit').value;
-        let r = document.getElementById('res');
-        if(!v) return;
-        let res;
-        if(u==="kg2lb") res = (v * 2.204).toFixed(2) + " Lbs";
-        if(u==="lb2kg") res = (v / 2.204).toFixed(2) + " Kg";
-        if(u==="c2f") res = (v * 9/5 + 32).toFixed(2) + " °F";
-        if(u==="f2c") res = ((v - 32) * 5/9).toFixed(2) + " °C";
-        if(u==="psi2bar") res = (v * 0.068).toFixed(2) + " Bar";
-        if(u==="m2ft") res = (v * 3.28).toFixed(2) + " Ft";
-        r.innerText = "Result: " + res;
-    }
-    function genPass() {
-        let c = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
-        let p = "";
-        for(let i=0; i<14; i++) p += c.charAt(Math.floor(Math.random()*c.length));
-        document.getElementById('passDisplay').innerText = p;
-    }
-    function decide() {
-        let a = ["HELL YES", "ABSOLUTELY", "MAYBE NOT", "RETRY LATER", "GO FOR IT", "DEFINITELY", "BET ON IT"];
-        document.getElementById('decision').innerText = a[Math.floor(Math.random()*a.length)];
-    }
-</script>
-</body>
-</html>
+        const c = document.getElementById('cat').value;
+        const v = parseFloat(document.getElementById('amt').value);
+        const f = document.getElementById('from').value;
+        const t = document.getElementById('to').value;
+        const r = document.getElementById('res');
+        if (isNaN(v)) { r.innerText = "---"; return; }
+        
+        if (c === 'temp') {
+            let k;
+            if (f === 'c') k = v + 273.15; else if (f === 'f') k = (v - 32) * 5/9 + 273.15; else k = v;
+            let out;
+            if (t === 'c
+                
