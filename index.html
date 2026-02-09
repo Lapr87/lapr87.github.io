@@ -126,9 +126,41 @@
         const r = document.getElementById('res');
         if (isNaN(v)) { r.innerText = "---"; return; }
         
-        if (c === 'temp') {
+                if (c === 'temp') {
             let k;
-            if (f === 'c') k = v + 273.15; else if (f === 'f') k = (v - 32) * 5/9 + 273.15; else k = v;
+            if (f === 'c') k = v + 273.15; else if (f === 'f') k = (v - 32) * 5/9 + 273.15; else if (f === 'r') k = v * 5/9; else k = v;
             let out;
-            if (t === 'c
-                
+            if (t === 'c') out = k - 273.15; else if (t === 'f') out = (k - 273.15) * 9/5 + 32; else if (t === 'r') out = k * 1.8; else out = k;
+            r.innerText = out.toFixed(2) + " " + t.toUpperCase();
+        } else {
+            let res = (v * data[c][f]) / data[c][t];
+            r.innerText = res.toLocaleString(undefined, {maximumFractionDigits: 5});
+        }
+    }
+
+    async function getPrices() {
+        const c = document.getElementById('coin').value, f = document.getElementById('fiat').value, d = document.getElementById('priceDisplay');
+        d.innerText = "WAIT...";
+        try {
+            const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${c}&vs_currencies=${f}`);
+            const json = await res.json();
+            const s = f==='usd'?'$':f==='eur'?'€':f==='gbp'?'£':'$';
+            d.innerText = s + json[c][f].toLocaleString();
+        } catch { d.innerText = "OFFLINE"; }
+    }
+
+    function analyze() {
+        const t = ["SCAN COMPLETE: Momentum shifting. Deploy maximum leverage.","TACTICAL ADVICE: Odds fluctuating. Hold for 5 minutes.","STRATEGY: Execute 'The Lapr87 Maneuver'. Go all-in.","ALERT: High-stakes alignment detected. No hesitation.","COMMAND: Divergent path found. Trust your gut."];
+        document.getElementById('advice').innerText = t[Math.floor(Math.random()*t.length)];
+    }
+
+    fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip);
+    setInterval(()=>{ 
+        let n = new Date(); 
+        document.getElementById('time').innerText=n.toLocaleTimeString(); 
+        document.getElementById('date').innerText=n.toLocaleDateString(); 
+    }, 1000);
+    loadUnits(); getPrices();
+</script>
+</body>
+</html>
