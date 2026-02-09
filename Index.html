@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapr87's Utility Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #38bdf8; --bg: #020617; --card: #1e293b; --text: #f1f5f9; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; }
+        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 20px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .dash-item { font-weight: 700; font-size: 1.1rem; }
+        .dash-item span { color: var(--accent); margin-left: 8px; font-family: monospace; }
+        .container { max-width: 900px; margin: auto; padding: 40px 20px; }
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { font-size: 3rem; margin: 0; letter-spacing: -1px; }
+        .search-bar { width: 100%; max-width: 500px; padding: 15px 25px; border-radius: 50px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 1rem; margin-top: 30px; outline: none; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid #334155; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: scale(1.02); }
+        h3 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        input, select, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 1rem; }
+        button { background: var(--accent); color: #020617; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; }
+        button:hover { background: #7dd3fc; }
+        .casino-zone { background: linear-gradient(135deg, #1e293b, #020617); border: 2px solid #f59e0b; padding: 50px; border-radius: 30px; margin-top: 60px; text-align: center; }
+        .btn-play { background: #f59e0b; color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.3rem; margin-top: 20px; box-shadow: 0 10px 20px rgba(245,158,11,0.3); }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <div class="dash-item">IP:<span id="ip">0.0.0.0</span></div>
+    <div class="dash-item">TIME:<span id="time">00:00:00</span></div>
+    <div class="dash-item">DATE:<span id="date">00/00/00</span></div>
+</div>
+<div class="container">
+    <header>
+        <h1>Lapr87's Lab 🛠️</h1>
+        <p>No ads, no clutter, just the tools you actually need.</p>
+        <input type="text" id="toolSearch" class="search-bar" placeholder="Search tools (e.g. 'kg', 'psi', 'luck')" onkeyup="filter()">
+    </header>
+    <div class="tool-grid" id="grid">
+        <div class="card" data-name="convert weight temperature length pressure kg lbs psi">
+            <h3>Master Converter</h3>
+            <input type="number" id="val" placeholder="Value">
+            <select id="unit">
+                <option value="kg2lb">Weight: Kg to Lbs</option>
+                <option value="lb2kg">Weight: Lbs to Kg</option>
+                <option value="c2f">Temp: °C to °F</option>
+                <option value="f2c">Temp: °F to °C</option>
+                <option value="psi2bar">Pressure: PSI to Bar</option>
+                <option value="m2ft">Length: Meters to Feet</option>
+            </select>
+            <button onclick="convert()">Calculate</button>
+            <p id="res" style="text-align:center; font-weight:bold; color:var(--accent);"></p>
+        </div>
+        <div class="card" data-name="password security generator">
+            <h3>Secure Key Gen</h3>
+            <p id="passDisplay" style="text-align:center; background:#0f172a; padding:10px; border-radius:5px; font-family:monospace;">********</p>
+            <button onclick="genPass()">Generate</button>
+        </div>
+        <div class="card" data-name="luck decision flip coin yes no">
+            <h3>The Luck Decider</h3>
+            <p id="decision" style="text-align:center; font-size:1.5rem; min-height:40px;">Should you do it?</p>
+            <button onclick="decide()">Ask Lapr87</button>
+        </div>
+    </div>
+    <div class="casino-zone">
+        <h2>Feeling the momentum? 🚀</h2>
+        <p>Calculations are done. Now it's time to play. Join me at <strong>Casino Rocket</strong> for an exclusive lift-off bonus.</p>
+        <a href="[lapr87.github.io]" class="btn-play">GET FREE SPINS</a>
+    </div>
+</div>
+<script>
+    fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip);
+    setInterval(()=>{
+        let n = new Date();
+        document.getElementById('time').innerText=n.toLocaleTimeString();
+        document.getElementById('date').innerText=n.toLocaleDateString();
+    }, 1000);
+    function filter() {
+        let q = document.getElementById('toolSearch').value.toLowerCase();
+        let c = document.getElementsByClassName('card');
+        for(let i=0; i<c.length; i++) c[i].style.display = c[i].getAttribute('data-name').includes(q) ? "" : "none";
+    }
+    function convert() {
+        let v = document.getElementById('val').value;
+        let u = document.getElementById('unit').value;
+        let r = document.getElementById('res');
+        if(!v) return;
+        let res;
+        if(u==="kg2lb") res = (v * 2.204).toFixed(2) + " Lbs";
+        if(u==="lb2kg") res = (v / 2.204).toFixed(2) + " Kg";
+        if(u==="c2f") res = (v * 9/5 + 32).toFixed(2) + " °F";
+        if(u==="f2c") res = ((v - 32) * 5/9).toFixed(2) + " °C";
+        if(u==="psi2bar") res = (v * 0.068).toFixed(2) + " Bar";
+        if(u==="m2ft") res = (v * 3.28).toFixed(2) + " Ft";
+        r.innerText = "Result: " + res;
+    }
+    function genPass() {
+        let c = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
+        let p = "";
+        for(let i=0; i<14; i++) p += c.charAt(Math.floor(Math.random()*c.length));
+        document.getElementById('passDisplay').innerText = p;
+    }
+    function decide() {
+        let a = ["HELL YES", "ABSOLUTELY", "MAYBE NOT", "RETRY LATER", "GO FOR IT", "DEFINITELY", "BET ON IT"];
+        document.getElementById('decision').innerText = a[Math.floor(Math.random()*a.length)];
+    }
+</script>
+</body>
+</html>
