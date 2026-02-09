@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Utility Labs by LAPR87: Compact tool hub for live market data, UD price tracking, and strategic analysis.">
-    <title>Utility Labs | Compact Tool Hub</title>
+    <meta name="description" content="Utility Labs by LAPR87: Professional-grade tool hub for market data and strategic analysis.">
+    <title>Utility Labs | Compact Command</title>
 
     <link rel="preconnect" href="https://api.ipify.org">
     <link rel="preconnect" href="https://api.coingecko.com">
@@ -14,33 +14,36 @@
 
     <style>
         :root { --accent: #38bdf8; --bg: #020617; --card: #1e293b; --text: #f1f5f9; --gold: #f59e0b; --green: #10b981; --red: #ef4444; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; line-height: 1.4; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; line-height: 1.2; font-size: 14px; }
         
-        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; min-height: 44px; box-sizing: border-box; }
-        .dash-item span { color: var(--accent); margin-left: 5px; font-family: monospace; }
+        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 8px; display: flex; justify-content: space-around; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.65rem; min-height: 38px; box-sizing: border-box; }
+        .dash-item span { color: var(--accent); margin-left: 3px; font-family: monospace; }
         
-        .container { max-width: 1000px; margin: auto; padding: 20px 15px; contain: layout; }
-        header { text-align: center; margin-bottom: 30px; min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        h1 { font-size: 2.5rem; margin: 0; font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase; }
+        .container { max-width: 1000px; margin: auto; padding: 10px; contain: layout; }
+        header { text-align: center; margin-bottom: 15px; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        h1 { font-size: 1.8rem; margin: 0; font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase; }
         
-        .signature { color: var(--accent); font-weight: 900; letter-spacing: 4px; font-size: 0.65rem; margin-top: 8px; margin-bottom: 8px; opacity: 0.9; }
-        .tagline { opacity: 0.7; font-size: 0.9rem; margin: 0; }
+        .signature { color: var(--accent); font-weight: 900; letter-spacing: 3px; font-size: 0.55rem; margin-top: 5px; opacity: 0.9; }
+        .tagline { opacity: 0.7; font-size: 0.75rem; margin-top: 3px; }
         
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; display: flex; flex-direction: column; min-height: 280px; box-sizing: border-box; }
-        h2 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; border-bottom: 1px solid #334155; padding-bottom: 8px; margin-bottom: 15px; }
+        /* 2-COLUMN GRID: Forced for both mobile and desktop */
+        .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
-        input, select, button { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 0.9rem; outline: none; }
-        button { background: var(--accent); color: #020617; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; margin-top: 8px; }
+        .card { background: var(--card); padding: 12px; border-radius: 16px; border: 1px solid #334155; display: flex; flex-direction: column; min-height: 220px; box-sizing: border-box; }
+        h2 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-bottom: 10px; }
         
-        .crypto-value { font-size: 2rem; font-weight: 900; color: var(--green); text-align: center; margin-top: 10px; font-family: monospace; min-height: 40px; }
-        .ud-tracker { font-size: 0.9rem; font-weight: 700; text-align: center; margin-bottom: 10px; font-family: monospace; }
-        .advice-box { background: #0f172a; border: 1px solid #334155; padding: 15px; border-radius: 10px; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent); font-size: 1rem; }
+        input, select, button { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 0.8rem; outline: none; }
+        button { background: var(--accent); color: #020617; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; margin-top: 5px; }
         
-        .casino-banner { background: linear-gradient(135deg, #1e293b, #020617); border: 2px solid var(--gold); padding: 30px; border-radius: 24px; margin-top: 40px; text-align: center; }
-        .btn-play { background: var(--gold); color: #020617; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.2rem; margin-top: 15px; }
+        .crypto-value { font-size: 1.4rem; font-weight: 900; color: var(--green); text-align: center; margin-top: 5px; font-family: monospace; min-height: 30px; }
+        .ud-tracker { font-size: 0.75rem; font-weight: 700; text-align: center; margin-bottom: 5px; font-family: monospace; }
+        .advice-box { background: #0f172a; border: 1px solid #334155; padding: 10px; border-radius: 8px; text-align: center; min-height: 60px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent); font-size: 0.85rem; }
         
-        footer { text-align: center; margin-top: 40px; padding-bottom: 20px; color: #94a3b8; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; }
+        /* INTEGRATED BANNER: Styled as a card to fit the grid */
+        .casino-card { background: linear-gradient(135deg, #1e293b, #020617); border: 2px solid var(--gold); padding: 15px; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 220px; }
+        .btn-play { background: var(--gold); color: #020617; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 0.9rem; margin-top: 10px; }
+        
+        footer { text-align: center; margin-top: 20px; padding-bottom: 15px; color: #94a3b8; font-size: 0.6rem; letter-spacing: 1px; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
     </style>
 </head>
@@ -60,58 +63,60 @@
 
     <div class="tool-grid">
         <section class="card">
-            <h2>Market Ticker & UD</h2>
-            <div style="display: flex; gap: 5px;">
+            <h2>Market & UD</h2>
+            <div style="display: flex; gap: 3px;">
                 <label for="coin" class="sr-only">Coin</label>
-                <select id="coin" onchange="getPrices()"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="solana">SOL</option><option value="dogecoin">DOGE</option></select>
+                <select id="coin" onchange="getPrices()"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="solana">SOL</option></select>
                 <label for="fiat" class="sr-only">Fiat</label>
                 <select id="fiat" onchange="getPrices()"><option value="usd">USD</option><option value="eur">EUR</option></select>
             </div>
             <div id="priceDisplay" class="crypto-value">---</div>
             <div id="udTracker" class="ud-tracker">UD: --%</div>
-            <button onclick="getPrices()">Refresh Market</button>
+            <button onclick="getPrices()">Refresh</button>
         </section>
 
         <section class="card">
-            <h2>Universal Converter</h2>
-            <select id="cat" onchange="loadUnits()" style="margin-bottom:5px;">
-                <option value="len">Length</option><option value="mass">Mass</option><option value="vol">Volume</option><option value="temp">Temp</option><option value="speed">Speed</option><option value="digital">Data</option>
+            <h2>Converter</h2>
+            <select id="cat" onchange="loadUnits()" style="margin-bottom:3px; padding: 5px;">
+                <option value="len">Length</option><option value="mass">Mass</option><option value="vol">Vol</option><option value="temp">Temp</option><option value="speed">Speed</option><option value="digital">Data</option>
             </select>
-            <input type="number" id="amt" placeholder="Amount" oninput="convert()">
-            <div style="display: flex; gap: 5px; margin: 5px 0;">
-                <select id="from" onchange="convert()"></select>
-                <select id="to" onchange="convert()"></select>
+            <input type="number" id="amt" placeholder="Amt" oninput="convert()" style="padding: 5px;">
+            <div style="display: flex; gap: 3px; margin: 3px 0;">
+                <select id="from" onchange="convert()" style="padding: 5px;"></select>
+                <select id="to" onchange="convert()" style="padding: 5px;"></select>
             </div>
-            <div id="res" style="text-align:center; font-weight:900; font-size:1.3rem; color:var(--accent); margin-top:5px;">---</div>
+            <div id="res" style="text-align:center; font-weight:900; font-size:1rem; color:var(--accent); margin-top:5px;">---</div>
         </section>
 
         <section class="card">
             <h2>Tactical Advisor</h2>
-            <div id="advice" class="advice-box">SYSTEM READY...</div>
-            <button onclick="analyze()">Run Strategy Scan</button>
+            <div id="advice" class="advice-box">READY...</div>
+            <button onclick="analyze()">Scan</button>
         </section>
-    </div>
 
-    <aside class="casino-banner">
-        <h3>Launch Sequence Ready 🚀</h3>
-        <a href="[PASTE_YOUR_LINK_HERE]" class="btn-play">ENTER COCKPIT</a>
-    </aside>
+        <aside class="casino-card">
+            <div style="font-weight:900; color:var(--gold); font-size:0.9rem;">ROCKET READY</div>
+            <p style="font-size:0.65rem; margin:5px 0;">Market aligned. Deploy now.</p>
+            <a href="[PASTE_YOUR_LINK_HERE]" class="btn-play">COCKPIT</a>
+        </aside>
+    </div>
 
     <footer>&copy; 2026 UTILITY LABS // BY LAPR87</footer>
 </main>
 
 <script defer>
     const data = {
-        len: {mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048, mi: 1609.34},
-        mass: {mg: 0.000001, g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495, ton: 1000},
+        len: {mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048},
+        mass: {mg: 0.000001, g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495},
         vol: {ml: 0.001, l: 1, gal: 3.78541, floz: 0.0295735},
         temp: {c: 'c', f: 'f', k: 'k'},
-        speed: {kmh: 1, mph: 1.60934, mps: 3.6, knot: 1.852},
+        speed: {kmh: 1, mph: 1.60934, mps: 3.6},
         digital: {b: 1, kb: 1024, mb: 1048576, gb: 1073741824}
     };
 
     function loadUnits() {
         const c = document.getElementById('cat').value, f = document.getElementById('from'), t = document.getElementById('to');
+        if(!data[c]) return;
         f.innerHTML = t.innerHTML = "";
         Object.keys(data[c]).forEach(u => {
             f.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
@@ -126,9 +131,9 @@
         if (c === 'temp') {
             let k = (f === 'c') ? v + 273.15 : (f === 'f') ? (v - 32) * 5/9 + 273.15 : v;
             let out = (t === 'c') ? k - 273.15 : (t === 'f') ? (k - 273.15) * 9/5 + 32 : k;
-            r.innerText = out.toFixed(2) + " " + t.toUpperCase();
+            r.innerText = out.toFixed(1) + " " + t.toUpperCase();
         } else {
-            r.innerText = ((v * data[c][f]) / data[c][t]).toLocaleString(undefined, {maximumFractionDigits: 4});
+            r.innerText = ((v * data[c][f]) / data[c][t]).toLocaleString(undefined, {maximumFractionDigits: 3});
         }
     }
 
@@ -141,13 +146,23 @@
             const symbol = f === 'usd' ? '$' : '€';
             const price = json[c][f];
             const change = json[c][`${f}_24h_change`];
-            
             d.innerText = symbol + price.toLocaleString();
             ud.innerText = `UD: ${change > 0 ? '+' : ''}${change.toFixed(2)}%`;
             ud.style.color = change >= 0 ? 'var(--green)' : 'var(--red)';
-        } catch { d.innerText = "OFFLINE"; }
+        } catch { d.innerText = "ERR"; }
     }
 
     function analyze() {
-        const t = ["SCAN COMPLETE: Momentum shifting.","TACTICAL ADVICE: Odds fluctuating.","STR
-                   
+        const t = ["MOMENTUM UP","HOLD POSITION","EXECUTE NOW","HIGH ALIGN","TRUST GUT"];
+        document.getElementById('advice').innerText = t[Math.floor(Math.random()*t.length)];
+    }
+
+    // Force load immediately to fix "not loading" issue
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip).catch(()=>document.getElementById('ip').innerText="0.0.0.0");
+        setInterval(() => { document.getElementById('time').innerText = new Date().toLocaleTimeString(); }, 1000);
+        loadUnits(); getPrices();
+    });
+</script>
+</body>
+</html>
