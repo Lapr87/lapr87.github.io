@@ -188,6 +188,19 @@
 </script>
 </body>
 </html>
+n()).then(d=>document.getElementById('ip').innerText=d.ip);
+    setInterval(()=>{ let n = new Date(); document.getElementById('time').innerText=n.toLocaleTimeString(); document.getElementById('date').innerText=n.toLocaleDateString(); }, 1000);
+    updateUnits();
+    fetchCrypto();
+    
+    function filter() {
+        let q = document.getElementById('toolSearch').value.toLowerCase();
+        let c = document.getElementsByClassName('card');
+        for(let i=0; i<c.length; i++) c[i].style.display = c[i].getAttribute('data-name').includes(q) ? "" : "none";
+    }
+</script>
+</body>
+</html>
         <h1>Lapr87's Lab 🛠️</h1>
         <p>No ads, no clutter, just the tools you actually need.</p>
         <input type="text" id="toolSearch" class="search-bar" placeholder="Search tools (e.g. 'kg', 'psi', 'luck')" onkeyup="filter()">
