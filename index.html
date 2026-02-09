@@ -12,24 +12,28 @@
 
     <style>
         :root { --accent: #38bdf8; --bg: #020617; --card: #1e293b; --text: #f1f5f9; --gold: #f59e0b; --green: #10b981; }
+        
+        /* Layout Shift Prevention */
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; line-height: 1.6; }
         
-        /* PERFORMANCE: Layout Shift Prevention */
         .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 15px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; min-height: 54px; }
         .dash-item span { color: var(--accent); margin-left: 5px; font-family: monospace; }
         
         .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
-        header { text-align: center; margin-bottom: 50px; min-height: 160px; }
-        h1 { font-size: 3.5rem; margin: 0; font-weight: 900; letter-spacing: -2px; line-height: 1.1; text-transform: uppercase; }
+        
+        /* FIXED HEADER: Better spacing for Mobile */
+        header { text-align: center; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 180px; }
+        h1 { font-size: 3.2rem; margin: 0; font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase; }
         
         /* BRANDING: LAPR87 Signature */
-        .signature { color: var(--accent); font-weight: 900; letter-spacing: 5px; font-size: 0.7rem; margin-top: -5px; margin-bottom: 20px; opacity: 0.9; text-transform: uppercase; }
+        .signature { color: var(--accent); font-weight: 900; letter-spacing: 5px; font-size: 0.75rem; margin-top: 12px; margin-bottom: 15px; opacity: 0.9; text-transform: uppercase; }
         
-        .tagline { opacity: 0.7; margin-top: 10px; font-size: 1.1rem; }
+        .tagline { opacity: 0.7; font-size: 1.1rem; margin-top: 5px; }
+        
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         
-        /* ACCESSIBILITY & DESIGN */
-        .card { background: var(--card); padding: 30px; border-radius: 24px; border: 1px solid #334155; transition: 0.3s; display: flex; flex-direction: column; min-height: 320px; }
+        /* CARDS & TOOLS */
+        .card { background: var(--card); padding: 30px; border-radius: 24px; border: 1px solid #334155; transition: 0.3s; display: flex; flex-direction: column; min-height: 320px; box-sizing: border-box; }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         h2 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; border-bottom: 1px solid #334155; padding-bottom: 12px; margin-bottom: 20px; }
         
@@ -65,17 +69,103 @@
         <section class="card">
             <h2>Live Market Ticker</h2>
             <div style="display: flex; gap: 8px;">
-                <select id="coin" onchange="getPrices()" aria-label="Select Cryptocurrency">
-                    <option value="bitcoin">BTC</option>
-                    <option value="ethereum">ETH</option>
-                    <option value="solana">SOL</option>
-                    <option value="dogecoin">DOGE</option>
-                </select>
-                <select id="fiat" onchange="getPrices()" aria-label="Select Fiat Currency">
-                    <option value="usd">USD ($)</option>
-                    <option value="eur">EUR (€)</option>
-                    <option value="gbp">GBP (£)</option>
-                </select>
+                <select id="coin" onchange="getPrices()" aria-label="Select Cryptocurrency"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="solana">SOL</option><option value="dogecoin">DOGE</option></select>
+                <select id="fiat" onchange="getPrices()" aria-label="Select Fiat Currency"><option value="usd">USD ($)</option><option value="eur">EUR (€)</option><option value="gbp">GBP (£)</option></select>
             </div>
-            <div id="priceDisplay" class="crypto-value"
-                
+            <div id="priceDisplay" class="crypto-value" aria-live="polite">---</div>
+            <button onclick="getPrices()">Refresh Market</button>
+        </section>
+
+        <section class="card">
+            <h2>Universal Converter</h2>
+            <select id="cat" onchange="loadUnits()" aria-label="Select conversion category">
+                <option value="len">Length</option><option value="mass">Mass</option><option value="vol">Volume</option><option value="temp">Temperature</option><option value="speed">Speed</option><option value="digital">Digital Data</option><option value="pressure">Pressure</option><option value="energy">Energy</option>
+            </select>
+            <input type="number" id="amt" placeholder="Amount" oninput="convert()" aria-label="Value to convert">
+            <div style="display: flex; gap: 8px; margin: 8px 0;">
+                <select id="from" onchange="convert()" aria-label="From unit"></select>
+                <select id="to" onchange="convert()" aria-label="To unit"></select>
+            </div>
+            <div id="res" style="text-align:center; font-weight:900; font-size:1.5rem; color:var(--accent); margin-top:10px;" aria-live="polite">---</div>
+        </section>
+
+        <section class="card">
+            <h2>Tactical Advisor</h2>
+            <div id="advice" class="advice-box" aria-live="polite">SYSTEM IDLE...</div>
+            <button onclick="analyze()">Run Strategy Scan</button>
+        </section>
+    </div>
+
+    <aside class="casino-banner">
+        <h3>Launch Sequence Ready 🚀</h3>
+        <p>Market variables aligned. It's time to leverage your position at <strong>Casino Rocket</strong>.</p>
+        <a href="[PASTE_YOUR_LINK_HERE]" class="btn-play">ENTER COCKPIT</a>
+    </aside>
+
+    <footer>
+        &copy; 2026 UTILITY LABS // OPERATED BY LAPR87
+    </footer>
+</main>
+
+<script defer>
+    const data = {
+        len: {mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.34, nmi: 1852, ly: 9460730472580800},
+        mass: {mg: 0.000001, g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495, st: 6.35029, ton: 1000},
+        vol: {ml: 0.001, l: 1, cup: 0.24, pt: 0.473176, qt: 0.946353, gal: 3.78541, floz: 0.0295735},
+        temp: {c: 'c', f: 'f', k: 'k'},
+        speed: {kmh: 1, mph: 1.60934, mps: 3.6, knot: 1.852, mach: 1234.8},
+        digital: {b: 1, kb: 1024, mb: 1048576, gb: 1073741824, tb: 1099511627776},
+        pressure: {pa: 1, bar: 100000, psi: 6894.76, atm: 101325},
+        energy: {j: 1, cal: 4.184, wh: 3600, kwh: 3600000, btu: 1055.06}
+    };
+
+    function loadUnits() {
+        const c = document.getElementById('cat').value, f = document.getElementById('from'), t = document.getElementById('to');
+        f.innerHTML = t.innerHTML = "";
+        Object.keys(data[c]).forEach(u => {
+            f.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
+            t.innerHTML += `<option value="${u}">${u.toUpperCase()}</option>`;
+        });
+        convert();
+    }
+
+    function convert() {
+        const c = document.getElementById('cat').value, v = parseFloat(document.getElementById('amt').value), f = document.getElementById('from').value, t = document.getElementById('to').value, r = document.getElementById('res');
+        if (isNaN(v)) { r.innerText = "---"; return; }
+        if (c === 'temp') {
+            let k = (f === 'c') ? v + 273.15 : (f === 'f') ? (v - 32) * 5/9 + 273.15 : v;
+            let out = (t === 'c') ? k - 273.15 : (t === 'f') ? (k - 273.15) * 9/5 + 32 : k;
+            r.innerText = out.toFixed(2) + " " + t.toUpperCase();
+        } else {
+            r.innerText = ((v * data[c][f]) / data[c][t]).toLocaleString(undefined, {maximumFractionDigits: 5});
+        }
+    }
+
+    async function getPrices() {
+        const c = document.getElementById('coin').value, f = document.getElementById('fiat').value, d = document.getElementById('priceDisplay');
+        d.innerText = "WAIT...";
+        try {
+            const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${c}&vs_currencies=${f}`);
+            const json = await res.json();
+            const symbols = {usd: '$', eur: '€', gbp: '£'};
+            d.innerText = (symbols[f] || '$') + json[c][f].toLocaleString();
+        } catch { d.innerText = "OFFLINE"; }
+    }
+
+    function analyze() {
+        const t = ["SCAN COMPLETE: Momentum shifting.","TACTICAL ADVICE: Odds fluctuating.","STRATEGY: Execute 'The Utility Lab Maneuver'.","ALERT: High-stakes alignment detected.","COMMAND: Divergent path found. Trust your gut."];
+        document.getElementById('advice').innerText = t[Math.floor(Math.random()*t.length)];
+    }
+
+    // Init
+    fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip);
+    setInterval(()=>{ 
+        let n = new Date(); 
+        document.getElementById('time').innerText=n.toLocaleTimeString(); 
+        document.getElementById('date').innerText=n.toLocaleDateString(); 
+    }, 1000);
+    loadUnits(); 
+    getPrices();
+</script>
+</body>
+</html>
