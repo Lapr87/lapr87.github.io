@@ -3,52 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Utility Labs by LAPR87: Professional-grade tool hub for market data, unit conversion, and tactical strategy.">
-    <title>Utility Labs | The Universal Tool Hub</title>
+    <meta name="description" content="Utility Labs by LAPR87: Compact tool hub for live market data, UD price tracking, and strategic analysis.">
+    <title>Utility Labs | Compact Tool Hub</title>
 
     <link rel="preconnect" href="https://api.ipify.org">
     <link rel="preconnect" href="https://api.coingecko.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
     <style>
-        :root { --accent: #38bdf8; --bg: #020617; --card: #1e293b; --text: #f1f5f9; --gold: #f59e0b; --green: #10b981; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; line-height: 1.6; }
+        :root { --accent: #38bdf8; --bg: #020617; --card: #1e293b; --text: #f1f5f9; --gold: #f59e0b; --green: #10b981; --red: #ef4444; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; line-height: 1.4; }
         
-        /* CLS FIX: Static dashboard height */
-        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 15px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; min-height: 56px; box-sizing: border-box; }
-        .dash-item { min-width: 120px; text-align: center; }
+        .dashboard { background: #0f172a; border-bottom: 2px solid var(--accent); padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; min-height: 44px; box-sizing: border-box; }
         .dash-item span { color: var(--accent); margin-left: 5px; font-family: monospace; }
         
-        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
-        header { text-align: center; margin-bottom: 50px; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        h1 { font-size: 3.5rem; margin: 0; font-weight: 900; letter-spacing: -2px; line-height: 1; text-transform: uppercase; }
+        .container { max-width: 1000px; margin: auto; padding: 20px 15px; contain: layout; }
+        header { text-align: center; margin-bottom: 30px; min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        h1 { font-size: 2.5rem; margin: 0; font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase; }
         
-        .signature { color: var(--accent); font-weight: 900; letter-spacing: 5px; font-size: 0.75rem; margin-top: 15px; margin-bottom: 15px; opacity: 0.9; text-transform: uppercase; }
-        .tagline { opacity: 0.7; font-size: 1.1rem; margin: 0; }
+        .signature { color: var(--accent); font-weight: 900; letter-spacing: 4px; font-size: 0.65rem; margin-top: 8px; margin-bottom: 8px; opacity: 0.9; }
+        .tagline { opacity: 0.7; font-size: 0.9rem; margin: 0; }
         
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .card { background: var(--card); padding: 30px; border-radius: 24px; border: 1px solid #334155; transition: 0.3s; display: flex; flex-direction: column; min-height: 340px; box-sizing: border-box; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; border-bottom: 1px solid #334155; padding-bottom: 12px; margin-bottom: 20px; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #334155; display: flex; flex-direction: column; min-height: 280px; box-sizing: border-box; }
+        h2 { margin-top: 0; color: var(--accent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; border-bottom: 1px solid #334155; padding-bottom: 8px; margin-bottom: 15px; }
         
+        input, select, button { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 0.9rem; outline: none; }
+        button { background: var(--accent); color: #020617; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; margin-top: 8px; }
+        
+        .crypto-value { font-size: 2rem; font-weight: 900; color: var(--green); text-align: center; margin-top: 10px; font-family: monospace; min-height: 40px; }
+        .ud-tracker { font-size: 0.9rem; font-weight: 700; text-align: center; margin-bottom: 10px; font-family: monospace; }
+        .advice-box { background: #0f172a; border: 1px solid #334155; padding: 15px; border-radius: 10px; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent); font-size: 1rem; }
+        
+        .casino-banner { background: linear-gradient(135deg, #1e293b, #020617); border: 2px solid var(--gold); padding: 30px; border-radius: 24px; margin-top: 40px; text-align: center; }
+        .btn-play { background: var(--gold); color: #020617; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.2rem; margin-top: 15px; }
+        
+        footer { text-align: center; margin-top: 40px; padding-bottom: 20px; color: #94a3b8; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-
-        input, select, button { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 0.95rem; box-sizing: border-box; outline: none; transition: 0.2s; }
-        button { background: var(--accent); color: #020617; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
-        
-        .crypto-value { font-size: 2.2rem; font-weight: 900; color: var(--green); text-align: center; margin: 15px 0; font-family: monospace; min-height: 60px; display: flex; align-items: center; justify-content: center; }
-        .advice-box { background: #0f172a; border: 1px solid #334155; padding: 25px; border-radius: 12px; text-align: center; min-height: 120px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
-        
-        .casino-banner { background: linear-gradient(135deg, #1e293b, #020617); border: 2px solid var(--gold); padding: 50px; border-radius: 30px; margin-top: 60px; text-align: center; }
-        
-        /* ACCESSIBILITY: Improved Contrast Ratio - Changed text to dark for better visibility on gold */
-        .btn-play { background: var(--gold); color: #020617; padding: 20px 60px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.4rem; margin-top: 25px; box-shadow: 0 10px 25px rgba(245,158,11,0.4); }
-        
-        /* ACCESSIBILITY: Increased Footer text brightness for contrast compliance */
-        footer { text-align: center; margin-top: 80px; padding-bottom: 40px; color: #94a3b8; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -56,44 +49,40 @@
 <nav class="dashboard">
     <div class="dash-item">IP: <span id="ip">0.0.0.0</span></div>
     <div class="dash-item">TIME: <span id="time">00:00:00</span></div>
-    <div class="dash-item">DATE: <span id="date">--/--/--</span></div>
 </nav>
 
 <main class="container">
     <header>
         <h1>Utility Labs</h1>
         <div class="signature">BY LAPR87</div>
-        <p class="tagline">Universal Metrics • Live Markets • Advanced Strategy</p>
+        <p class="tagline">Universal Metrics • Live Markets</p>
     </header>
 
     <div class="tool-grid">
         <section class="card">
-            <h2>Live Market Ticker</h2>
-            <div style="display: flex; gap: 8px;">
-                <label for="coin" class="sr-only">Select Coin</label>
+            <h2>Market Ticker & UD</h2>
+            <div style="display: flex; gap: 5px;">
+                <label for="coin" class="sr-only">Coin</label>
                 <select id="coin" onchange="getPrices()"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="solana">SOL</option><option value="dogecoin">DOGE</option></select>
-                <label for="fiat" class="sr-only">Select Fiat</label>
-                <select id="fiat" onchange="getPrices()"><option value="usd">USD ($)</option><option value="eur">EUR (€)</option><option value="gbp">GBP (£)</option></select>
+                <label for="fiat" class="sr-only">Fiat</label>
+                <select id="fiat" onchange="getPrices()"><option value="usd">USD</option><option value="eur">EUR</option></select>
             </div>
             <div id="priceDisplay" class="crypto-value">---</div>
+            <div id="udTracker" class="ud-tracker">UD: --%</div>
             <button onclick="getPrices()">Refresh Market</button>
         </section>
 
         <section class="card">
             <h2>Universal Converter</h2>
-            <label for="cat" class="sr-only">Select Category</label>
-            <select id="cat" onchange="loadUnits()">
-                <option value="len">Length</option><option value="mass">Mass</option><option value="vol">Volume</option><option value="temp">Temp</option><option value="speed">Speed</option><option value="digital">Data</option><option value="pressure">Pressure</option><option value="energy">Energy</option>
+            <select id="cat" onchange="loadUnits()" style="margin-bottom:5px;">
+                <option value="len">Length</option><option value="mass">Mass</option><option value="vol">Volume</option><option value="temp">Temp</option><option value="speed">Speed</option><option value="digital">Data</option>
             </select>
-            <label for="amt" class="sr-only">Amount</label>
             <input type="number" id="amt" placeholder="Amount" oninput="convert()">
-            <div style="display: flex; gap: 8px; margin: 8px 0;">
-                <label for="from" class="sr-only">From Unit</label>
+            <div style="display: flex; gap: 5px; margin: 5px 0;">
                 <select id="from" onchange="convert()"></select>
-                <label for="to" class="sr-only">To Unit</label>
                 <select id="to" onchange="convert()"></select>
             </div>
-            <div id="res" style="text-align:center; font-weight:900; font-size:1.5rem; color:var(--accent); margin-top:10px;">---</div>
+            <div id="res" style="text-align:center; font-weight:900; font-size:1.3rem; color:var(--accent); margin-top:5px;">---</div>
         </section>
 
         <section class="card">
@@ -105,23 +94,20 @@
 
     <aside class="casino-banner">
         <h3>Launch Sequence Ready 🚀</h3>
-        <p>Market variables aligned. It's time to leverage your position at <strong>Casino Rocket</strong>.</p>
         <a href="[PASTE_YOUR_LINK_HERE]" class="btn-play">ENTER COCKPIT</a>
     </aside>
 
-    <footer>&copy; 2026 UTILITY LABS // OPERATED BY LAPR87</footer>
+    <footer>&copy; 2026 UTILITY LABS // BY LAPR87</footer>
 </main>
 
 <script defer>
     const data = {
-        len: {mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.34, nmi: 1852, ly: 9460730472580800},
-        mass: {mg: 0.000001, g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495, st: 6.35029, ton: 1000},
-        vol: {ml: 0.001, l: 1, cup: 0.24, pt: 0.473176, qt: 0.946353, gal: 3.78541, floz: 0.0295735},
+        len: {mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048, mi: 1609.34},
+        mass: {mg: 0.000001, g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495, ton: 1000},
+        vol: {ml: 0.001, l: 1, gal: 3.78541, floz: 0.0295735},
         temp: {c: 'c', f: 'f', k: 'k'},
-        speed: {kmh: 1, mph: 1.60934, mps: 3.6, knot: 1.852, mach: 1234.8},
-        digital: {b: 1, kb: 1024, mb: 1048576, gb: 1073741824, tb: 1099511627776},
-        pressure: {pa: 1, bar: 100000, psi: 6894.76, atm: 101325},
-        energy: {j: 1, cal: 4.184, wh: 3600, kwh: 3600000, btu: 1055.06}
+        speed: {kmh: 1, mph: 1.60934, mps: 3.6, knot: 1.852},
+        digital: {b: 1, kb: 1024, mb: 1048576, gb: 1073741824}
     };
 
     function loadUnits() {
@@ -142,36 +128,26 @@
             let out = (t === 'c') ? k - 273.15 : (t === 'f') ? (k - 273.15) * 9/5 + 32 : k;
             r.innerText = out.toFixed(2) + " " + t.toUpperCase();
         } else {
-            r.innerText = ((v * data[c][f]) / data[c][t]).toLocaleString(undefined, {maximumFractionDigits: 5});
+            r.innerText = ((v * data[c][f]) / data[c][t]).toLocaleString(undefined, {maximumFractionDigits: 4});
         }
     }
 
     async function getPrices() {
-        const c = document.getElementById('coin').value, f = document.getElementById('fiat').value, d = document.getElementById('priceDisplay');
+        const c = document.getElementById('coin').value, f = document.getElementById('fiat').value, d = document.getElementById('priceDisplay'), ud = document.getElementById('udTracker');
         d.innerText = "...";
         try {
-            const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${c}&vs_currencies=${f}`);
+            const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${c}&vs_currencies=${f}&include_24hr_change=true`);
             const json = await res.json();
-            const symbols = {usd: '$', eur: '€', gbp: '£'};
-            d.innerText = (symbols[f] || '$') + json[c][f].toLocaleString();
+            const symbol = f === 'usd' ? '$' : '€';
+            const price = json[c][f];
+            const change = json[c][`${f}_24h_change`];
+            
+            d.innerText = symbol + price.toLocaleString();
+            ud.innerText = `UD: ${change > 0 ? '+' : ''}${change.toFixed(2)}%`;
+            ud.style.color = change >= 0 ? 'var(--green)' : 'var(--red)';
         } catch { d.innerText = "OFFLINE"; }
     }
 
     function analyze() {
-        const t = ["SCAN COMPLETE: Momentum shifting.","TACTICAL ADVICE: Odds fluctuating.","STRATEGY: Execute 'The Utility Lab Maneuver'.","ALERT: High-stakes alignment detected.","COMMAND: Divergent path found. Trust your gut."];
-        document.getElementById('advice').innerText = t[Math.floor(Math.random()*t.length)];
-    }
-
-    window.onload = () => {
-        fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>document.getElementById('ip').innerText=d.ip);
-        setInterval(()=>{ 
-            let n = new Date(); 
-            document.getElementById('time').innerText=n.toLocaleTimeString(); 
-            document.getElementById('date').innerText=n.toLocaleDateString(); 
-        }, 1000);
-        loadUnits(); 
-        getPrices();
-    };
-</script>
-</body>
-</html>
+        const t = ["SCAN COMPLETE: Momentum shifting.","TACTICAL ADVICE: Odds fluctuating.","STR
+                   
